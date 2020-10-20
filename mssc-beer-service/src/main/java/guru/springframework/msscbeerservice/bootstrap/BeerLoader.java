@@ -5,7 +5,6 @@ import guru.springframework.msscbeerservice.repositories.BeerRepository;
 import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
@@ -13,7 +12,7 @@ import java.math.BigDecimal;
  * Created by jt on 2019-05-17.
  */
 @RequiredArgsConstructor
-@Component
+//@Component
 public class BeerLoader implements CommandLineRunner {
 
     public static final String BEER_1_UPC = "0631234200036";
@@ -25,9 +24,9 @@ public class BeerLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-          if(beerRepository.count() == 0 ) {
-              loadBeerObjects();
-          }
+        if (beerRepository.count() == 0) {
+            loadBeerObjects();
+        }
     }
 
     private void loadBeerObjects() {
