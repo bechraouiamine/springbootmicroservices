@@ -1,5 +1,6 @@
 package guru.springframework.msscbeerservice.services.inventory;
 
+import guru.sfg.beer.service.services.inventory.BeerInventoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ class BeerInventoryServiceRestTemplateImplTest {
     void getOnhandInventory() {
 
         //todo evolve to use UPC
-      //  Integer qoh = beerInventoryService.getOnhandInventory(BeerLoader.BEER_1_UUID);
+        //  Integer qoh = beerInventoryService.getOnhandInventory(BeerLoader.BEER_1_UUID);
 
         //System.out.println(qoh);
 
