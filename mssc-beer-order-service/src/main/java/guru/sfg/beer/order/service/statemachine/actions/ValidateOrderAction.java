@@ -1,5 +1,6 @@
 package guru.sfg.beer.order.service.statemachine.actions;
 
+import guru.sfg.beer.brewery.model.BeerOrderDto;
 import guru.sfg.beer.brewery.model.BeerOrderEventEnum;
 import guru.sfg.beer.brewery.model.BeerOrderStatusEnum;
 import guru.sfg.beer.brewery.model.events.ValidateOrderRequest;
@@ -15,6 +16,7 @@ import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.action.Action;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -32,9 +34,13 @@ public class ValidateOrderAction implements Action<BeerOrderStatusEnum, BeerOrde
     @Override
     public void execute(StateContext<BeerOrderStatusEnum, BeerOrderEventEnum> stateContext) {
         String beerOrderId = stateContext.getMessage().getHeaders().get(BeerOrderManagerImpl.ORDER_ID_HEADER).toString();
-        BeerOrder beerorder = beerOrderRepository.findOneById(UUID.fromString(beerOrderId));
+        Optional<BeerOrder> optionalBeerOrder = beerOrderRepository.findById(UUID.fromString(beerOrderId));
 
-        jmsTemplate.convertAndSend(JmsConfig.VALIDATE_ORDER_QUEUE, ValidateOrderRequest.builder().beerOrderDto(beerOrderMapper.beerOrderToDto(beerorder)));
+        optionalBeerOrder.ifPresentOrElse(beerOrder -> {
+            BeerOrderDto beerOrderDto = beerOrderMapper.beerOrderToDto(beerOrder);
+            ValidateOrderRequest validateOrderRequest = ValidateOrderRequest.builder().beerOrderDto(beerOrderDto).build();
+            jmsTemplate.convertAndSend(JmsConfig.VALIDATE_ORDER_QUEUE, validateOrderRequest);
+        }, () -> log.error("Failed execution, beer id : " + beerOrderId));
 
         log.info("Sent Validation request to queue for order id : " + beerOrderId);
     }
