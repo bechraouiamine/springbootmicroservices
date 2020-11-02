@@ -5,6 +5,7 @@ import guru.sfg.beer.brewery.model.BeerPagedList;
 import guru.sfg.beer.brewery.model.BeerStyleEnum;
 import guru.sfg.beer.service.services.BeerService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/")
 @RestController
+@Slf4j
 public class BeerController {
 
     private static final Integer DEFAULT_PAGE_NUMBER = 0;
@@ -62,6 +64,8 @@ public class BeerController {
 
     @GetMapping("beerUpc/{upc}")
     public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc) {
+        log.info("Amine showing upc : " + upc );
+
         return new ResponseEntity<>(beerService.getByUpc(upc), HttpStatus.OK);
     }
 
