@@ -1,5 +1,6 @@
 package guru.sfg.beer.inventory.service.services;
 
+import guru.sfg.beer.brewery.model.BeerInventoryDto;
 import guru.sfg.beer.brewery.model.BeerOrderDto;
 import guru.sfg.beer.brewery.model.BeerOrderLineDto;
 import guru.sfg.beer.inventory.service.domain.BeerInventory;
@@ -40,6 +41,22 @@ public class AllocationServiceImpl implements AllocationService {
         log.debug("Total Ordered: " + totalOrdered.get() + " Total Allocated: " + totalAllocated.get());
 
         return totalOrdered.get() == totalAllocated.get();
+    }
+
+    @Override
+    public void deallocateOrder(BeerOrderDto beerOrderDto) {
+        beerOrderDto.getBeerOrderLines().forEach(
+                beerOrderLineDto -> {
+                    BeerInventory beerInventory = BeerInventory.builder()
+                            .beerId(beerOrderLineDto.getBeerId())
+                            .quantityOnHand(beerOrderLineDto.getQuantityAllocated())
+                            .upc(beerOrderLineDto.getUpc())
+                            .build();
+                    beerInventoryRepository.saveAndFlush(beerInventory);
+
+                    log.info("Order deallocated, order number : " + beerOrderLineDto.getId() + " beer upc : " + beerOrderLineDto.getUpc());
+                }
+        );
     }
 
     private void allocateBeerOrderLine(BeerOrderLineDto beerOrderLine) {
