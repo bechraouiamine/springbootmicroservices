@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Profile;
 /**
  * Created by aminebechraoui, on 15/12/2020, in guru.sfg.beer.brewery.gateway.config
  */
-@Profile("google")
-@Configuration
+//@Profile("google")
+//@Configuration
 public class GoogleConfig {
 
     @Bean
