@@ -11,7 +11,7 @@ activemq-artemis-docker
 
 https://github.com/vromero/activemq-artemis-docker
 
-docker run -it --rm -p 8161:8161 -p 61616:61616 vromero/activemq-artemis
+docker run -it --rm -p 8161:8161 -p 61616:61616 -d vromero/activemq-artemis
 
 docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_USER=springboot -e MYSQL_PASSWORD=springboot -d mysql:5.6
 
