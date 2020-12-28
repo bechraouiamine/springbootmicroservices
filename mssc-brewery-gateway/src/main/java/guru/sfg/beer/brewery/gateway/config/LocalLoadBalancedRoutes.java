@@ -23,16 +23,13 @@ public class LocalLoadBalancedRoutes {
                 .route(route -> route.path("/api/v1/beer/*/inventory*")
                         .uri("lb://inventory-service")
                         .id("inventory-service"))
-                .build();
-    }
-
-    @Bean
-    public RouteLocator localDiscoveryCustomerAPIRoutes(RouteLocatorBuilder builder) {
-        return builder
-                .routes()
+                .route(r -> r.path("/inventory-failover/**", "/inventory-failover*")
+                        .uri("lb://inventory-failover")
+                        .id("inventory-failover-service"))
                 .route(route -> route.path("/api/v1/customers*", "/api/v1/customers/*", "/api/v1/customers/**")
                         .uri("lb://order-service")
                         .id("order-service"))
                 .build();
     }
+
 }
