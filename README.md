@@ -7,16 +7,17 @@ You can learn more about the courses here:
 * [Spring Framework 5: Beginner to Guru](https://www.udemy.com/course/spring-framework-5-beginner-to-guru/?couponCode=GITHUB_SFGPETCLINIC)
 * [Testing Spring Boot: Beginner to Guru](https://www.udemy.com/testing-spring-boot-beginner-to-guru/?couponCode=GITHUB_REPO_SF5B2G)
 
-activemq-artemis-docker
-
-https://github.com/vromero/activemq-artemis-docker
-
-docker run -it --rm -p 8161:8161 -p 61616:61616 -d vromero/activemq-artemis
-
 docker run --name some-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_USER=springboot -e MYSQL_PASSWORD=springboot -d mysql:5.6
 
+docker run -d -p 9411:9411 openzipkin/zipkin
+
+docker run -it --rm -p 8161:8161 -p 61616:61616 -d vromero/activemq-artemis
 artemis / simetraehcapa
+activemq-artemis-docker
+https://github.com/vromero/activemq-artemis-docker
 
 compiler params : 
 
 -parameters -Amapstruct.defaultComponentModel=spring
+
+-Dspring.profiles.active=local,local-discovery
