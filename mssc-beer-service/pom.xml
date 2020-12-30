@@ -17,6 +17,10 @@
 
     <description>MSSC Beer Service</description>
 
+    <properties>
+        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
