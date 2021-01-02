@@ -21,3 +21,7 @@ compiler params :
 -parameters -Amapstruct.defaultComponentModel=spring
 
 -Dspring.profiles.active=local,local-discovery
+
+zipkin project :
+
+https://github.com/openzipkin-attic/docker-zipkin
