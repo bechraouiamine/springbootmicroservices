@@ -30,8 +30,8 @@ public class LocalLoadBalancedRoutes {
                         .uri("lb://inventory-failover")
                         .id("inventory-failover-service"))
                 .route(route -> route.path("/api/v1/customers*", "/api/v1/customers/*", "/api/v1/customers/**")
-                        .uri("lb://order-service")
-                        .id("order-service"))
+                        .uri("lb://beer-order-service")
+                        .id("beer-order-service"))
                 .build();
     }
 

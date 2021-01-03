@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAsync
 @EnableScheduling
 @Configuration
-public class TeskConfig {
+public class TaskConfig {
 
     @Bean
     TaskExecutor taskExecutor() {
