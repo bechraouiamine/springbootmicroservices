@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS beerservice;
-CREATE DATABASE IF NOT EXISTS beerservice CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
